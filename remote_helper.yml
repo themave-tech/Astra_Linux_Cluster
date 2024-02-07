@@ -1,0 +1,51 @@
+---
+- name: playbook1
+  hosts: all_workstations
+  become: yes
+  become_method: sudo
+  become_user: root
+  tasks:
+  tasks:
+   - name: Remove package
+     become: true
+     apt:
+       name: ['vino', 'tigervnc-scraping-server']
+       state: absent
+   - name: Install x11vnc
+     become: true
+     apt: 
+       name: x11vnc
+       update_cache: yes
+       state: latest
+   - name: copy rhelp
+     copy: 
+       src: /adm/ansible/playbook1/rhelp
+       dest: /bin/rhelp
+       mode: 0711
+     become: true
+   - name: copy rstop
+     copy: 
+       src: /adm/ansible/playbook1/rstop
+       dest: /bin/rstop
+       mode: 0711
+     become: true
+   - name: copy rhelp.desktop
+     become: true
+     copy: 
+       src: /adm/ansible/playbook1/rhelp.desktop
+       dest: /usr/share/applications/rhelp.desktop
+       mode: 0755
+   - name: copy rstop.desktop
+     become: true
+     copy: 
+       src: /adm/ansible/playbook1/rstop.desktop
+       dest: /usr/share/applications/rstop.desktop
+       mode: 0755
+   - name: Add rhelp sudoers
+     shell: "/bin/echo -e 'ALL ALL=(root) NOPASSWD: /bin/rhelp' | /bin/tee /etc/sudoers.d/rhelp"
+     become: true
+   - name: Add rstop sudoers
+     shell: "/bin/echo -e 'ALL ALL=(root) NOPASSWD: /bin/rstop' | /bin/tee /etc/sudoers.d/rstop"
+     become: true
+
+     
