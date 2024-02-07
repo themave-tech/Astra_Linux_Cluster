@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Остановка УП
+Type=Application
+NoDisplay=false
+Exec=sudo /bin/rstop
+Hidden=false
+Terminal=false
+StartupNotify=false

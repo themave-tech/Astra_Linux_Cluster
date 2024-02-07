@@ -1,0 +1,16 @@
+#!/bin/bash
+fly-dialog --caption "Удаленный помощник" --icon help-browser --yesno "Запустить УП 3.0?"
+if [[ "$?" == "1" ]]; then
+  echo "failstart";
+  exit 0;
+fi
+genpwd=$(tr -dc 0-9 </dev/urandom | head -c 5 ; echo '')
+userhost=$(echo $HOSTNAME)
+mkdir -p ~/.vnc 2>/dev/null
+x11vnc -wait 10 -noxdamage -passwd $genpwd -display :0 -o ~/.vnc/x11vnc.log -bg -timeout 350
+if [[ "$?" == "1" ]]; then
+  echo "error with x11vnc start";
+  fly-dialog --caption "Удаленный помощник" --icon help-browser --msgbox "Ошибка запуска.<br>Обратитесь в техническую поддержку."
+  exit 0;
+fi
+fly-dialog --caption "Удаленный помощник" --icon help-browser --msgbox "УП запущен<br>Сообщите специалисту:<br>Имя ПК: $userhost<br>Пароль подключения: $genpwd"
