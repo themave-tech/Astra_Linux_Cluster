@@ -1,3 +1,0 @@
-#!/bin/bash
-sudo x11vnc -kill
-fly-dialog --caption "Удаленный помощник" --icon help-browser --msgbox "УП будет выключен.<br>Хорошего дня!<br>"

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Запуск УП
-Type=Application
-NoDisplay=false
-Exec=sudo /bin/rhelp
-Hidden=false
-Terminal=false
-StartupNotify=false
-Icon=help-browser
