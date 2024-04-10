@@ -527,6 +527,7 @@ find . -perm 777 -type f -name 'cron*' 	#the same but only for perm 777
 find . -perm 777 -exec chmod 555 {} \;	#find all files and dir with perm 777 and change perm on 555
 find . -name 'file*' -exec rm -f {} \;	#find all files with name file and del it
 find /var/log/ -name '*.log*' -size +4096M -exec rm -f {} \;
+find /var/log/ -name '*.log*' -size +4096M -exec sh -c 'cat /dev/null >| $0' {} \;
 #-exec	is tag for run other command after found
 find .	-mtime -1	#all files which was change in last 24 hours
 find .	-mtime +1	#all files whish was change late
