@@ -1,0 +1,860 @@
+sudo -i
+useradd -m test		-m =create dir
+passwd test
+login
+userdel -f -r test		-r =del dir 	-f =force
+----------------------------------------------------------------
+vi
+x 	=del for Vie
+w! 	=save
+nano
+ctrl +x 	=exit
+ctrl +o		=save
+----------------------------------------------------------------
+visudo		#open sudoers
+groupadd group1		#add group this user
+sudo usermod -a -G sudo test	#add user test in group sudo
+sudo usermod -a -G group1,group2 user	#add user in 2 groups
+sudo usermod -G sudo test	#add user test in group sudo and del other groups
+usermod group1 newUser		#add newUser in group1
+groups		#show groups user
+w 	#who online in system
+cat /etc/passwd		#users
+----------------------------------------------------------------
+man
+/-l		#search in vi
+alt +n		#next resault
+mv file file1		#rename file or dir
+rmdir		#del empty dir
+rm -r		#del dir
+cp file file1		#copy file
+cp -r dir dir1
+----------------------------------------------------------------
+yum/apt search httpd	#search packet httpd
+yum/apt install httpd	#install httpd	
+yum update	#update all packets
+apt update	#update info for all packets in cash
+apt upgrade	#update all packets
+----------------------------------------------------------------
+top
+shift+M		#Memory
+shift+P		#Processor
+D	#for setting delay value
+nice -20 before 19 (-20 max, 19 min)
+R	#change nice
+K	#kill process with signal [0-31] (15 pause and kill, 9 force kill)
+----------------------------------------------------------------
+which locate	#is install locate?
+locate		#search info about command
+updatedb	#update info about command
+locate motd	#search all about command motd
+find / -name cron	#search file with name "cron"
+find / -name 'cron*'
+----------------------------------------------------------------
+apt-get search		#search in rep
+apt-cache search	#search in cache
+apt-cache search apache2
+apt-get clean		#del temp in local rep
+apt-get autoclean	#del all not available packets
+apt-get install -s apache2	#simulate install apache2
+apt-get install	-y apache2	#autoinstall
+apt-get install	-yq apache2	#autoinstall & skip progress
+apt-get source apache2		#download all packets for apache2
+apt-get dist-upgrade		#update or install new packets with uninstall old packets
+apt-get upgrade		#update all packets
+----------------------------------------------------------
+apt-cache stats		#static about packets
+apt-cache depends apache2	#all dependence apache2
+apt-cache pkgnames	#all packets in rep
+apt-cache pkgnames | wc -l
+apt-cache pkgnames apache2	#list all packets apache2
+apt-cache unmet		#unsatisfactory depend
+----------------------------------------------------------------
+aptitude	#GUI
+shift ?		#all options
+? 		#search packets, n - next resault
+aptitude update	#update cache
+aptitude search apache2
+aptitude install apache2
+----------------------------------------------------------
+dselect		#setting and configure for packets managers
+----------------------------------------------------------------
+whereis nano	#where is packet nano
+rpm -i mypacket	#install rpm packet
+rpm -e nano	#uninstall packet nano
+nano-2.3.1-10.el7.x86_64.rpm
+name-version-relise-distr-architecture
+rpm -ihv	#i - install, h - progress, v - more info
+rpm -qi nano	#q - info about packet nano, i - more info (version and other)
+rpm -q --list	#associated packets
+rpm -qR nano	#all packet for nano
+rpm -U nano.rpm		#install and update
+rpm -f		#reinstall old version
+rpm --rebilddb		#create new db about all packets
+nano /usr/lib/rpm/rpmrc
+----------------------------------------------------------------
+cat /ets/issue [or] uname -a	#info about system
+wget --no-check-certificate [url]	#download without check certificate
+apt-get update & apt-get -f upgrade	#update and install dependence packets
+dpkg -i packet.deb
+which [packet_name]
+dpkg --get-selections	#list all install packets
+dpkg --get-selections | grep [packet_name]
+dpgk -L [packet_name]		#list all install dependence for this packet
+dpkg-reconfigure [packet_name]	#reconfigure packet
+dpkg --remove [packet_name]	#del packet without config file
+dpkg --purge [packet_name]	#del packet with config file
+----------------------------------------------------------
+yum check-update
+yum search	#search packets
+yum install	#install
+yum upgrade	#del old packets and install new versions
+yum remove httpd	#del packet httpd
+yum list	#all packets in repository
+yum info httpd	#info about packet
+yum deplist http	#all dependencies httpd
+yum clean 	#del all old packets (metadata, cache and other)
+----------------------------------------------------------------
+yumdownloader httpd	#dowload rpm packet httpd
+yumdownloader --resolve httpd	#download packet and all dependencies
+rpm2cpio httpd.rpm	#unzip cpio archive into *.rpm packet
+rpm2cpio httpd.rpm > httpd.cpio
+rpm2cpio httpd.rpm | cpio -t	#unzip httpd.rpm and view all files
+cpio -t < httpd.cpio
+----------------------------------------------------------------
+vi/vim file	#create and open file in vi/vim
+Esc - command
+hjkl or left, right, up, down
+L - last string on screen
+H - first string
+G - last string in file
+1G - 1 string in file, or 1gg
+5G - 5 string in file, or 5gg
+yy - copy string
+6yy - copy 6 string
+p/P - insert string under/over cursor
+U - cancel
+/Uncomment - search "Uncomment", n - next resualt
+? - search
+dd - del string
+6dd - del 6 string
+
+I - incert
+cw - delete word and Incert on
+cc - delete string and Incert on
+R - replace
+
+: - last string
+%s/deb/cent - replace first words "deb" on "cent" in file
+%s/deb/cent/g - replace all words "deb" on "cent" in file
+:w - save
+:q! - force exit
+:wq - exit and save
+:r /etc/passwd - inport into file
+:!ls - command ls
+:!mkdir - create dir
+----------------------------------------------------------------
+cat log1 log2
+cat log*
+wc - word count
+wc log1 [string words simvol]
+cat log* | wc -l
+split -l 10 log1 #разделить файл на файлы с указанным число строк
+diff log1 log2		#сравнить содержимое файлов
+rm log*
+----------------------------------------------------------------
+/dev		#devices and other
+/var/log 	#ps. group whoopsie - group for metric
+var/cache
+var/lib - configuration
+/sys		#devices setting
+/sys/devices/software		#setting software
+ps aux
+/proc 		#process
+/proc/modules
+/proc/meminfo
+/proc/cpuinfo
+/proc/sys/kernel
+/proc/iomem	#info about used at the moment memory
+----------------------------------------------------------------
+/proc/modules	#kernel modules
+lsmod		#kernel modules
+lspci 		#information about all devices
+lspci -v 	#more info
+lspci -vv | grep VGA 	#even more info about VGA (for example)
+lspci -vvv | grep VGA 	#very much info
+lspci -n	#number id device
+lspci -x	#info in 16 code
+lspci -b	#info from bridge
+lspci -t	#info from tire
+lspci -s <number_provider> from /usr/share/hwdata/pci
+lspci -i /dir/pci.ids	#info from file
+lspci -m	#machine text
+
+lsusb -v
+lsusb -s <id_provider>
+lsusb -t 	#tree usb controller
+----------------------------------------------------------------
+modprobe -l	#list modules for old distr (centos 6.6 or ubuntu 12.04), lsmod - for new OS
+modprobe -r <name>	#del module
+modprobe <name>		#install module
+rmmod <name> 	#del module
+insmod /lib/modules/.../kernel/drivers/char/lp.ko	#install module
+----------------------------------------------------------------
+grub (old), grub2 (new)
+#for enable GRUB menu add comment in vi /etc/default/grub for strings:
+change GRUB_HIDDEN_TIMEOUT=0 and GRUB_HIDDEN_TIMEOUT_QUIET=true
+and improve value GRUB_TIMEOUT=10 until 30 (for example)
+update-grub	#update info about grub
+/etc/grub.d/	#file grub for boot-menu
+----------------------------------------------------------------
+df -h 		#list filesystem from /dev
+in /dev/* 	#all devices, where sd - sata drive, sr - cdroom, fd - flopy drive
+ls -al cd*	#list all cd drive
+cat /etc/fstab	#all mounted device /dev by start system
+UUIID - universal unique identification number of devices
+blkid		#list UUID from directory /dev/disk/by-uuid/
+----------------------------------------------------------------
+WARNING! 
+/dev/*		#all files for devices with COLD turn off
+/dev/bus/	#all USB devices can be turn off on hot
+Hal		#manage for connection device, that create module in system for device
+dbus		#system utility for process communication
+----------------------------------------------------------------
+/proc	#directory and also virtual filesystem procfs 
+#in that directory have directory of process
+/proc/mounts 	#all mount devices or procfs
+/proc/irq	#all interrapt requests
+/proc/cpuinfo	#all information about processor
+/proc/iomem	#all information about all type of memory
+/proc/irq	#all list of interrupt request
+/proc/modules	#all information about modules
+proc/version	#all indormation about version of the core
+----------------------------------------------------------------
+fhs - filesystem hierarchy standarts (standarts of directory and files for Linux system)
+#fhs can see in /
+directory /root located individually, because sometimes we have problem with directory /home
+directory /usr/local/ is special dir of local files only for this host
+----------------------------------------------------------------
+/var/log/boot.log or /var/log/messages	#information about loading of system for old OS
+journalctl -b	#journal about boot messages for more modern OS
+dmesg		#journal about boot messages
+/var/log/bot.log
+/var/log/messages
+
+bios and bootMaster
+master boot record (0 or 1 sector on HDD)
+transfer of control to GRUB, GRUB2, LILO
+OS loader
+user environment (PID=0 or 1)
+----------------------------------------------------------------
+init or telinit 
+init - is system of initialization (PID=1)
+number system of initialization: 
+0 - stop, 1 - single, 2 - multi-user without net, 3 - multi-user wich inet, 4 - not reglament, 5 - wich inet and graphical shell, 6 - reboot
+#for check level system of initialization use: who -r or runlevel
+#use telinit <number> for change level, for example:
+telinit 3
+----------------------------------------------------------------
+nano file\ with\ spaces		#create or open file with space
+255 - limit symbol in name, in other file system diffirent limit
+nano b??k 	# ? - 1 symbol
+nano b*k	# * - some symbol
+ls b[aus]ck	# b + a or u or s + ck
+ls b[a-z][a-z]k
+ls -F	#type (@ - link)
+ls -R	#recursive
+cp -i	#check name file and copy
+cp -p	#copy with save privelegies
+cp -a	#all copy dir or files = cp -dpR
+----------------------------------------------------------------
+cp -u	#update file
+w 	#time
+mv (muve)
+mv -i file file2	#check and rename file, if file2 not exists
+mv file file2		#rename file or replace info in file2 if file2 exists
+rm f*
+rm -Rf		#del dir and all everything it
+tar c		#create
+tar x		#untar
+tar A		#add file in tar archive
+tar r		#add file in the end archive
+tar u		#update
+tar d		#check different
+tar t		#view content
+tar v		#more info about files in archive
+tar f		#file in filesystem
+tar cvfz dir.tgz dir/		#create	archive dir
+tar xvfz test.tgz		#untar
+tar xvfz test.tgz -C /etc	#untar in dir /etc
+----------------------------------------------------------------
+gzip file1	#create gz compression file1
+gunzip file1	#extract gz
+tar cvfz dir.tar.gz dir/	#create	archive dir with compression
+----------------------------------------------------------------
+ln [options] file link_name
+ln /etc/hosts  hard_link	#create point input for file system
+ln -s /etc/hosts symb_link	#create soft link
+ls -il	#list files with inodes
+soft link can create in others filesystem and soft link has other inode than original file
+hard links can't create in others filesystem and have the same inode
+----------------------------------------------------------------
+rmdir	#del empty dir
+rm -rf dir/	#del dir with files
+groupadd newgroup	#create new group
+chgrp newgroup dir/ 	#change group for dir
+chgrp -R newgroup dir/ 	#change group for dir with recursive
+----------------------------------------------------------------
+tail -n 20 auth.log
+tail -f auth.log
+tail -f auth.log | grep authentication
+cat auth.log syslog
+cat auth.log syslog > test.log
+cat test.log | grep fail
+cat test.log | grep fail | grep authentication
+ls | grep cron
+less /fail - N / Shift + N / P
+less - :20 + Shift + G
+----------------------------------------------------------------
+suid - bit id user
+sgid - bit id group
+t-bit - Фиксированный бит - это бит разрешения, который устанавливается в каталоге, позволяющий удалять или переименовывать файл только владельцу файла в этом каталоге, владельцу каталога или пользователю root
+chmod u+s /bin/nano 	#add users rights of file for all users
+chmod g+s /bin/nano	#add group rights of file for all users
+chmod u-s /bin/nano	#cancel bit id user setting
+chmod g-s /bin/nano	#cancel bit id user setting
+chmod o+t /dir 		#add t-bit (other users can't del file)
+chmod 744	1=x 2=w 4=r
+chown -R test.test dir
+usermod -g mygroup user
+----------------------------------------------------------------
+groupadd <namegroup>	#create group
+umask		#for dir 000-777, for files 000-666 rwx=0
+umask 022	#rwx-r-r
+umask -S	#view
+newgroup group1 	#change active group for dir
+newgrp group2		#set default group for dir
+stat <filename>
+chattr +A file	#where A - atime
+chattr +a 	#only add info in file
+chattr +c	#save info in zip
+chattr +i	#immunitet for file (not del, not change and other)
+chattr -i	#cancel immunitet 
+----------------------------------------------------------
+cron.deny 	#Если cron.allow не существует, все пользователи могут отправлять файлы crontab, за исключением пользователей, перечисленных в cron.deny
+cron.allow 	#Если cron.allow существует, только пользователи, указанные в этом файле, могут создавать, редактировать, отображать или удалять файлы crontab.
+* * * * *	#Every 1 min
+*/5 * * * *	#Every 5 min
+:05 * * * *
+0,5 * * * *	
+0,30 * * * *	#Every 30 min
+*/5 13 * * *	#13:05, 13.10...13:55
+*/5 13-15 * * *	#13:05...15:55
+*/5 13-15 1,15 jan *	#01.01 and 15.01 in 13:05...15:55
+min hour day_mounth mounth day_week
+cron.daily 	#every day
+cron.hourly	#every hour
+cron.mounthly	#every mounth
+cron.weekly	#every week
+----------------------------------------------------------------
+/bin		#command and programm for all users
+/sbin		#command and programm for adm
+/lib		#library for programm
+/usr		#all programm, kernel and xwindow
+/var		#cache, log and other
+/tmp
+/dev		#info about all device
+/proc		#info about all process
+/root		#home directory user root
+----------------------------------------------------------------
+find /dir -name <filename>
+find /dir -size +1M
+find /dir -size +500k
+find /dir -size -1M
+find /dir -size 1M
+find /dir -perm 777			#look for files with 777(rwx-rwx-rwx)
+find /dir -user <username>		#find only usernames files
+find /dir -maxdepth 1 -name <filename>	#find only in /dir without recursive
+updatedb				#update information in db (updatedb.conf), use before <locate>
+PRUBE_BIND_MOUNTS="yes"			#don't look for in FS with type BIND (available in two points)
+PRUNE_NAMES	#ignored type of files
+PRUNESFS	#ignored type of FS
+PRUNEPATH	#ignored directory
+locate filename | grep <parameter>
+whereis <program_name>			#example: whereis nano, where install program
+which <program_name>			#where executing file
+type <program_name>			#interpration program in Linux
+----------------------------------------------------------------
+#for command locate
+/etc/updatedb.conf
+prune_bind_mounts	#ignore or no files on bind mount device
+prunenames	#ignore type files
+prunepath	#ignore dir
+prunefs		#ignore FS
+----------------------------------------------------------------
+dd 	#command only for files
+<dd> comand for copy, replicate and write data (only for files)
+/dev/zero	#device null byte source
+ls -lh		#command for view info about all files with readed size in kB or Mb
+dd if=/dev/zero of=file.iso bs=1024 count=1	#write 1 segment (1024 bite) from /dev/zero in file.iso
+dd if=/dev/zero of=file.iso bs=1M count=2	#write 1M from /dev/zero in file.iso with 2 count (circle), when sum = 2M
+dd if=/dev/zero of=file.log bs=1G count=1
+dd if=/dev/sda1 of=mbr.bak bs=512 count=1 #copy master boot record (first boot record inside 512 bite)
+P.S. 512 bite is default size for command <dd> without option <bs>
+dd if=file conv=ucase	#convert all content (registr)
+dd if=file of=filename conv=ucase	##convert all content (registr) in filename
+dd if=/dev/urandom of=filename count=1		#write random data in filename
+dd if=/dev/sda1 of=/dev/sdc1 	#duplicate all data from sda1 on sdc1
+----------------------------------------------------------------
+stat filename	#all info about file (time and other)
+touch -a filename	#change access time (stat <file>)
+touch -m filename	#change time modify
+touch -r locatime filename	#change access and modify time how on localtime
+----------------------------------------------------------------
+ldconfig	#clear cache and update data about library
+*.so - library file
+/etc/ld.so.conf		#file configuration library in OS
+/etc/ld.so.conf.d/	#also files configuration library in OS
+ldconfig	#command for update information about all lib
+/usr/local/lib	#other all system library
+/usr/lib	#also system library
+cd /usr/local/ && mkdir mylib && nano ./mylib/lib.so 	#create library
+export LD_LIBRARY_PATH=/usr/local/mylib
+export LD_LIBRARY_PATH=/usr/local/mylib:/some_directory/somelib
+WARNING! command export add library only for your user
+#for add library for all users, add string </usr/local/mylib/*.so> in /etc/ld.so.conf or /etc/ld.so.conf.d/
+----------------------------------------------------------------
+ps		#all process in this session
+ps -e		#all process in system
+TTY		#number session or env
+ps -x		#status process, S - sleep, R/R+ - run
+ps -aux		#where VSZ-? and RSS-?
+ps -aux | grep firefox
+ps -uU username	#view all process username
+ps --forest	#all process in tree of process
+ps -uU root --forest	#view all process root in tree
+----------------------------------------------------------------
+uptime		#view all general information
+top		#system monitor
+where NI - nice, VIRT - virtual memory, RES - permanent mem, SHR - share mem, S - status, TIME+ - time uptime this process
+d 1		#change delay for update info
+s 1		#change delay for update info
+for example: top -d1
+top -p <pid>
+top -n2		#close top after 2 delay
+top -b		#noninteractive
+#interactive
+Shift +M	#sort on mem
+Shift +C	#sort on proc
+k <pid> <signal> 	#kill process (15 or 9)  
+u <username>	#sort on username
+WARNING! How to change NICE
+19 - the lowest and -20 is the highest
+r <pid> <value_nice>	#change NICE for process
+----------------------------------------------------------------
+#nice and renice tutorials
+nice top 	#change NICE on 10 (default 10)
+nice -10 top	#the same 
+nice -n 10 top	#the same
+nice --20 top
+nice -n -20 top
+pgrep <process_name>
+renice -n -20 <pid>
+renice -n -20 -u <username>
+default NICE for root's process's is 0
+----------------------------------------------------------------
+kill -s 1	#signal SIG_HUP soft kill (correct kill with save data) some process will restart after SIG_HUP
+kill -s 9	#signal SIG_KILL hard kill
+kill -s 15	#default signal like soft kill (also correct kill with save data) 
+
+Signal     Value     Action   Comment
+   -------------------------------------------------------------------------
+   SIGHUP        1       Term    Hangup detected on controlling terminal or death of controlling process
+   SIGINT        2       Term    Interrupt from keyboard
+   SIGQUIT       3       Core    Quit from keyboard
+   SIGILL        4       Core    Illegal Instruction
+   SIGABRT       6       Core    Abort signal from abort(3)
+   SIGFPE        8       Core    Floating point exception
+   SIGKILL       9       Term    Kill signal
+   SIGSEGV      11       Core    Invalid memory reference
+   SIGPIPE      13       Term    Broken pipe: write to pipe with no readers
+   SIGALRM      14       Term    Timer signal from alarm(2)
+   SIGTERM      15       Term    Termination signal
+   SIGUSR1   30,10,16    Term    User-defined signal 1
+   SIGUSR2   31,12,17    Term    User-defined signal 2
+   SIGCHLD   20,17,18    Ign     Child stopped or terminated
+   SIGCONT   19,18,25    Cont    Continue if stopped
+   SIGSTOP   17,19,23    Stop    Stop process
+   SIGTSTP   18,20,24    Stop    Stop typed at tty
+   SIGTTIN   21,21,26    Stop    tty input for background process
+   SIGTTOU   22,22,27    Stop    tty output for background process
+----------------------------------------------------------------
+uname -o	#type OS the same <uname --operating-system>
+uname -n	#hostname (uname --nodename)
+uname -s	#name kernel OS the same <uname> or <uname --kernel-name>
+uname -m	#type OS (x64/86) the same <uname --machine> or <uname -p> or <uname -i>
+uname -v	#version kernel the same <uname --version>
+uname -r	#release version kernel the same <uname --kernel-release>
+uname -a	#all information the same <uname --all>
+----------------------------------------------------------------
+foreground	#передний план (default)
+background	#задний план
+Ctrl+z		#process will stop (SIGHUP) and move in background
+jobs		#list all background process
+fg <number>	#move process from background to foreground
+<command> &	#start process in background
+nohup tail -f filename #start "tail" with immunity for SIGHUP
+----------------------------------------------------------------
+nohup <command>		#output will in nohup.out
+for example: 
+nohub ping -c 500 ya.ru
+nohub ping -c 500 ya.ru > /dev/null 2>&1
+----------------------------------------------------------------
+which locate
+apt install locate
+updatedb
+locate pwd	#search pwd in database of system
+locate file | grep something
+----------------------------------------------------------------
+which <command>		#use to search the shell command and show the way to it
+command <pwd> is the same /bin/pwd
+whereis <command>	#also use to search the shell command and show the way to it and to documetations
+----------------------------------------------------------------
+find .	-name 'cron*'	#search in corrent dir all files with name cron*
+find .	-type f -name 'cron*'	#the same but only files
+find .	-type d -name 'cron*'	#the same but only dir
+find . -perm 777 -type f -name 'cron*' 	#the same but only for perm 777
+find . -perm 777 -exec chmod 555 {} \;	#find all files and dir with perm 777 and change perm on 555
+find . -name 'file*' -exec rm -f {} \;	#find all files with name file and del it
+find /var/log/ -name '*.log*' -size +4096M -exec rm -f {} \;
+#-exec	is tag for run other command after found
+find .	-mtime -1	#all files which was change in last 24 hours
+find .	-mtime +1	#all files whish was change late
+find .	-atime -1	#all files which was avaible or used in last 24 hours
+find . -user <username>
+find . -group <groupname>
+find /dir -size -512c
+find /dir -size +512c
+find /dir -size +512k
+find /dir -size -512k
+find /dir -size +512M
+find /dir -size -512M
+----------------------------------------------------------------
+<lsblk> or <ls -l | grep sd>	#show all device like HDD or SSD
+#new HHD/SDD before mount have to formating
+wipefs -a /dev/sda	#Del title FS on device
+fdisk sda	#command for create section
+\m - help
+\n - new
+\p - primary
+\e - extended
+\w - write
+mkfs -t ext4 /dev/sda1	#create FS for sda1 (default setting)
+mkfs -t ext4 /dev/sda -m -c
+#-m add 5% only for root
+#-c check broken block on disk 
+mount /dev/sda /dir
+df -h		#show information about devices
+umount /dir
+blkid	#show info about all device (UUID, TYPE and other)
+/etc/fstab	#file for automount
+deffault options: 
+rw - allow operations read and write
+suid - allow operations with suid and sgid
+dev - allow create files devices
+exec - allow execution files
+auto - automount
+nouser - only root can mount
+async - all operations input/output shoud execution asynchronously
+WARNING! 
+#For ban options have to use <no> before option, e.g: noexec
+dump - 0 (off), 1 (on)
+pass - check FSCK
+mount -a	#mount all FS
+umount -av	#unount all FS
+----------------------------------------------------------------
+free -m
+dd if=/dev/zero of=/swap.swp bs=1024 count=800k
+#where <count> - number of repetitions
+mkswap /swap/swap.swp
+swapon swap.swp
+free -m		#show all memory info
+/etc/fstab
+/swap/swap.swp 		/	 swap	defaults	0 0
+swapoff -a	#OFF all swap memory
+swapon -a	#ON all swap memory
+mkswap sdb	#use all device sdb for swap
+swapon sdb	#ON swap on sdb
+/etc/fstab
+/dev/sdb 	/	swap	defaults	0 0
+----------------------------------------------------------------
+/media		#default mount point for USB and other
+----------------------------------------------------------------
+du	#info about size
+du -h	#info about size in human readable format
+du -s	#sum size
+du -sh	#sum size in human readable format 
+du -ah	#show info about all files and dir
+df	#show FS
+df -h	#show FS in human readable format
+df -a	#show all FS
+----------------------------------------------------------------
+fsck		#for check umount FS
+fsck /dev/sda	#check sda
+e2fsck		#also utills for check umount FS
+fsck -A		#check all FS from /etc/fstab (after <umount -a>)
+----------------------------------------------------------------
+mke2fs		#command for work with ext{2-4}
+mke2fs /dev/sdb		#default with ext2 (unjournalable)
+mke2fs -t ext4 /dev/sdb
+mke2fs -t ext4 -L <partition_name> /dev/sdb
+mke2fs -t ext4 -F /dev/sdb	#force
+mke2fs -t ext4 -c /dev/sdb	#check
+debugfs -w /dev/sdb
+\freefrag	#check on fragmentation
+\stats		#status
+\lsdel		#view del inode
+WARNING!
+testdisk	#for check, analysis and restore files 
+testdisk /dev/sdb
+analize - advanced - list	#restore files
+----------------------------------------------------------------
+dumpe2fs /dev/sdb	#info about ext{2-4}
+dumpe2fs /dev/sdb | more
+dumpe2fs -b /dev/sdb	#list broken block
+dumpe2fs -h /dev/sdb	#info only about superblock
+tune2fs	-l /dev/sdb	#view parameters ext{2-4}
+tune2fs	-m /dev/sdb	#change default reserved size for FS (default 5%)
+tune2fs	-U random /dev/sdb	#change UUID
+tune2fs	-M /home/newdir /dev/sdb	#change mount point
+tune2fs	-L /dev/sdb	#change FS volume name
+----------------------------------------------------------------
+mkfs -t xfs /dev/sdb
+# all bin files xfsprogs in /usr/sbin
+xfsprogs xfs_admin -u /dev/sdb	#view UUID
+xfsprogs xfs_admin -l /dev/sdb	#view label name
+xfsprogs xfs_admin -L newlabel /dev/sdb	#change label name
+xfsprogs xfs_info	#info
+xfsprogs xfs_growfs	#extend FS
+xfsprogs xfs_copy	#copy
+xfsprogs xfs_freeze	#denied and ban
+xfsdump -f /home/backup /dev/sdb	#create dump FS xfs
+\label
+\labeldrive
+xfsrestore -f /home/backup/ /where_mountFS
+----------------------------------------------------------------
+time <command>	#view time run command
+pwd	#where i am
+whoami	#who i am
+<cd ~> the same <cd>
+/etc/init.d/<program_name>
+/etc/init.d/cron restart
+#in terminal
+Ctrl+Y		#del all before
+Ctrl+A		#move on start
+Ctrl+K		#del all after
+Ctrl+E		#move on finish
+Ctrl+W		#del 1 word
+Ctrl+L		#clear
+----------------------------------------------------------------
+export TEST='http://google.com'		#add or change variable
+echo $TEST >> variable.txt
+unset TEST				#del variable
+env					#list all variable
+2>			#error
+&>			#input and error
+& > /dev/null		#del all
+exec < file		#run from file
+exec < file > result.txt
+top | grep root
+----------------------------------------------------------------
+touch file{1-5}
+ls | grep file | xargs rm	#del all found files
+cat file1 file2		#read and view all files
+cat file1 file2 > file3
+join file1 file2	#connect data file1 with file2 common data
+paste file1 file2	#the same but by columns
+sort
+split
+#in vim
+\y x2
+\9 + \p
+split -l 2 file splited.	#break file
+tr text change_text < file > newfile
+uniq file	#only uniq data
+----------------------------------------------------------------
+head -n 3 file
+tail -n 3 file
+tail -f file | grep <value>
+wc	#string words byte
+wc -L file	#the longest string
+wc -l		#number of string
+wc -w		#number of words
+sed 's/word_for_change/word/' file > file1	#change 1 word on string
+sed 's/word_for_change/word/g' file > file1	#glogal change word on string
+----------------------------------------------------------------
+quota quotatool
+in /etc/fstab add options <usrquota,grpquota>
+mount -o remount /
+quotacheck -avmug
+aquta.group
+aqota.user
+----------------------------------------------------------------
+edquota username
+soft - max. value for soft qoutas
+hard - max. value for hard qoutas
+repqouta -a | grep username
+soft/hard = <50000> (50Mb)
+----------------------------------------------------------------
+SysV - service initialization for old OS (successively run process)
+upstart - the same but parallel run process (Ubuntu 2009-2015)
+systemd - the same but modern
+in /etc rc{0-6} dir for scripts initialization level
+runlevel	#view level initialization
+initctl list	#/etc/init
+.conf	- file config
+in /etc/init.d/ files systemv
+init-checkconf <name>
+start <name> or init <level>
+status <name>
+----------------------------------------------------------------
+#systemd controlled cron, journald, journalctl and other
+#unit is files configuration systemd (.service, .mount and other)
+systemd -t help		#view all units
+in systemd used target units whithout level initialization
+----------------------------------------------------------------
+/etc/systemd/system		#all configuration service and units local level
+/usr/lib/systemd/system		#the same but on system level (a.g .service, .mount, .socket)
+[Unit]	- description unit
+[Service]
+ExecStart - script
+[Install] - when service will start (level), show <systemctl get-default>
+systemctl is-enabled <servicename>
+systemctl is-active <servicename>
+----------------------------------------------------------------
+systemctl list-units --type=service		#show all runing service
+systemctl list-units --type=service --all	#show all service
+systemctl list-units-files --type=service	#show names files configuration runing services
+systemctl list-units-files --type=service --all	#the same but not only runing
+----------------------------------------------------------------
+/etc/systemd/system
+/usr/lib/systemd/system
+<name>.service
+[Unit]
+Description=test service logger
+After=sshd.service
+[Service]
+ExecStart=/usr/bin/logger -f /var/log/messages "Hello World"
+[Install]
+WantedBy=multi-user.target
+#after that 
+systemctl enable <name>.service && systemctl start <name>.service
+journalctl -xn
+systemctl get-default
+systemctl list-dependencies graphical.target | grep target
+----------------------------------------------------------------
+wall
+nome text
+Ctrl+D
+
+wall -n
+some text
+Ctrl+D
+
+wall -n "Some text"
+----------------------------------------------------------------
+MBR - master boot record (until 2 Tb) BIOS - first 512 bite (max 4 sections)
+GPT (GUID partition table) (until 9,4 ZTb) UEFI - individual secure segment/section (max 128 sections)
+----------------------------------------------------------------
+blkid	#for show FS on all section
+#for MBT
+fdisk /dev/sda
+\m - help
+\n - new
+\p - primary
+\e - extended
+...
++256M
+\w - write
+mkfs -t ext4 /dev/sda1
+
+partprobe /dev/sda	#read table sections
+cat /proc/partitions
+mkdir /mnt/dir
+mount /dev/sda1 /mnt/dir
+df -h		#show info about FS
+automount install in /etc/fstab
+----------------------------------------------------------------
+#for GPT
+wipefs -a /dev/sda	#del FS on device
+gdisk /dev/sda
+\? - help
+\n - new
+\L - list all codes for type section
+\w - write
+partprobe
+cat /proc/partitions
+automount also install in /etc/fstab
+----------------------------------------------------------------
+ReiserFS and BtrFS
+----------------------------------------------------------------
+parted /dev/sda
+print
+mklabel gpt
+mkpart primery 2048s 100%
+print
+quit
+mkfs -t xfs /dev/sda1
+blkid
+----------------------------------------------------------------
+screen -list			#show all sessions
+screen
+screen -d <id_session>		#exit
+screen -r <id_session>		#enter
+screen -d tail -f /etc/fstab
+exit
+screen -S <name_session>
+screen -x <user_name>/<id_or_name>
+-------------------------------------------------------------
+#xz is better then gzip, but also only for files
+dd if=/dev/zero of=/dir/file bs=1024 count=1024
+#bs - bite
+xz /dir/file		#zip
+xz -l /dir/file.xz		#more info
+xz -d /dir/file.xz	#unzip
+unxz /dir/file.xz	#unzip
+
+#tar for directory
+tar -cf dir.tar dir/	#zip dir
+xz dir.tar
+xz -l dir.tar.xz
+unxz dir.tar.xz
+tar -xf dir.tar
+-------------------------------------------------------------
+pgrep
+ps aux | grep vim			#list all process
+pgrep -l -u <user_name>			#show all process by user 
+pgrep -v -l -u <user_name>		#the same but invert
+pgrep -l -u <user_name> <process>	#show <process_name> by <user_name>
+pgrep -n -l -u <user_name>		#show the latest process by <user_name>
+
+pkill <process_name>			#kill all <process_name>
+#for example: pkill evolution
+pkill -u <user_name> <process_name>	#kill all <process_name> by <user_name>
+pkill -t pts/1				#kill all process in session pts/1
+-------------------------------------------------------------
+dmesg			#messages about all devices when OS is loading
+dmesg | grep usb
+-------------------------------------------------------------
+GRUB and GRUB2 (GRand Unified Bootloader) - loader
+initramfs - mini OS
+grub-install /dev/device	#install GRUB on device
+-------------------------------------------------------------
+/boot/grub/grub.cfg			#config GRUB
+#setting grub in file /etc/default/grub
+grub-mkconfig > /boot/grub/grub.cfg	#read by configuration file
+/etc/grub.d/				#also config GRUB
+/boot/grub/device.map			#where installed GRUB
+-------------------------------------------------------------
+/boot/grub/menu.lst
+-------------------------------------------------------------
